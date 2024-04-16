@@ -7,11 +7,10 @@
 </div>
 
 @section Scripts {
-    <!--<script src="../qr-scanner.umd.min.js"></script>-->
-    <!--<script src="../qr-scanner.legacy.min.js"></script>-->
-    <script type="module">
-        import QrScanner from "/lib/qr-scanner/qr-scanner.min.js";
-
+    <script src="~/lib/qr-scanner/qr-scanner.umd.min.js"></script>
+    <script src="~/lib/qr-scanner/qr-scanner.legacy.min.js"></script>
+    <script src="~/lib/qr-scanner/qr-scanner.min.js"></script>
+    <script>
         const video = document.getElementById('qr-video');
         const videoContainer = document.getElementById('video-container');
 
