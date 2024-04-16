@@ -1,7 +1,7 @@
 {
     "name": "Archivr",
     "slug": "archivr",
-    "version": "1.3.1.2",
+    "version": "1.3.1.3",
     "description": "Archive management portal to track your storage",
     "url": "https://github.com/mkenfenheuer/archivr",
     "arch": [
