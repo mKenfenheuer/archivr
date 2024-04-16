@@ -1,0 +1,102 @@
+﻿@model Archivr.UI.Models.ArchiveItem
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.Name</h1>
+<hr />
+<div>
+    <div class="row mb-3">
+        <div class="col-12 col-sm-6">
+            <div class="mb-2">
+                <a class="btn btn-primary mb-1" asp-action="Edit" asp-route-id="@Model?.Id"><i class="fa-solid fa-pen"></i> Edit</a>
+                <a class="btn btn-secondary mb-1" asp-action="PrintItemLabel" asp-route-id="@Model?.Id"><i class="fa-solid fa-print"></i> Print Label</a>
+                <a class="btn btn-secondary mb-1" asp-action="DownloadItemLabel" asp-route-id="@Model?.Id"><i class="fa-solid fa-print"></i> Download Label</a>
+                <a class="btn btn-secondary mb-1" asp-action="Index"><i class="fa-solid fa-chevron-left"></i> Back to List</a>
+            </div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ItemType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ItemType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Parent)
+                </dt>
+                <dd class="col-sm-10">
+                    <a asp-action="Details" asp-route-id="@Model?.Parent?.Id">@Model?.Parent?.Name</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-center">
+            <iframe src="/Items/PreviewItemLabel/@Model.Id" class="align-self-center" style="border:1px solid #cecece;  padding: 5mm; width:89mm;height:47mm">
+            </iframe>
+        </div>
+    </div>
+    <h3>Children</h3>
+    <hr />
+
+    <p>
+        <a class="btn btn-primary" asp-action="Create" asp-route-id="@Model.Id"><i class="fa-solid fa-plus"></i> Create New</a>
+    </p>
+    <div class="overflow-scroll w-100">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemType)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Children)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemType)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-glasses"></i> Details</a></li>
+                                    <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id"><i class="fa-solid fa-pen"></i> Edit</a></li>
+                                    <li><a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

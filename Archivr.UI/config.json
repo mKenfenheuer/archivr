@@ -1,0 +1,20 @@
+{
+    "name": "Archivr",
+    "slug": "archivr",
+    "version": "1.2.9",
+    "description": "Archive management portal to track your storage",
+    "url": "https://github.com/mkenfenheuer/archivr",
+    "arch": [
+        "aarch64",
+        "amd64",
+        "armhf"
+    ],
+    "map":[
+        "addon_config:rw"
+    ],
+    "homeassistant_api": false,
+    "ingress": true,
+    "ingress_port": 80,
+    "panel_icon": "mdi:archive",
+    "panel_title": "Archivr"
+}

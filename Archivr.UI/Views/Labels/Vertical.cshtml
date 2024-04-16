@@ -1,0 +1,77 @@
+﻿@model Archivr.PrintingServer.Model.Label
+@{
+    Layout = "/Views/Shared/_LabelLayout.cshtml";
+}
+
+<style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin:0;
+        overflow: hidden;
+    }
+
+    * {
+        font-family: sans-serif;
+        letter-spacing: 0.4mm;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .container {
+        position: fixed;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+    }
+
+        .container .label-code {
+            font-weight: bold;
+            font-size: 13mm;
+            width: 100%;
+            text-align: center;
+            margin-top: -3mm;
+            margin-bottom: 3mm;
+        }
+
+        .container .qr-code {
+            height: auto;
+            width: 100%;
+            object-fit: contain;
+            align-self: center;
+            margin-bottom: -3mm;
+        }
+
+        .container .label-title {
+            margin-top: 4mm;
+            font-size: 7mm;
+            font-weight: bold;
+            width: 100%;
+            height: 7mm;
+            text-overflow: ellipsis;
+            align-self: center;
+            overflow: hidden;
+            margin: 1mm 0;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .container .label-description {
+            font-size: 5mm;
+            width: 100%;
+            height: 23mm;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+            text-align: center;
+        }
+</style>
+
+<div class="container">
+    <img class="qr-code" src="@Model.QrCodeImage" />
+    <div class="label-code">@Model.Code.ToUpper()</div>
+    <div class="label-title">@Model.Name.Trim()</div>
+</div>

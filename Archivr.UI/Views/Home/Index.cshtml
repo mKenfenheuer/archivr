@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Search Items</h1>
+    <form class="d-inline" asp-controller="Items" asp-action="Search">
+        <div class="input-group mb-3">
+            <input type="text" name="search" class="form-control" placeholder="Search Items" aria-label="Search Items">
+            <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <a class="btn btn-outline-secondary" asp-action="IdentifyItem"><i class="fa-solid fa-camera"></i></a>
+        </div>
+    </form>
+</div>

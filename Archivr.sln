@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivr.UI", "Archivr.UI\Archivr.UI.csproj", "{F8D2BF49-88A4-4702-970E-5439ECA9289A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archivr.PrintingServer", "Archivr.PrintingServer\Archivr.PrintingServer.csproj", "{3E7E8D3B-4EF8-483E-8726-39E0AEB45385}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{48C39967-31AA-4C0B-B451-3CB2C7409D61}"
+	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8D2BF49-88A4-4702-970E-5439ECA9289A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D2BF49-88A4-4702-970E-5439ECA9289A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D2BF49-88A4-4702-970E-5439ECA9289A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D2BF49-88A4-4702-970E-5439ECA9289A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7E8D3B-4EF8-483E-8726-39E0AEB45385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7E8D3B-4EF8-483E-8726-39E0AEB45385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7E8D3B-4EF8-483E-8726-39E0AEB45385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7E8D3B-4EF8-483E-8726-39E0AEB45385}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D626A49-7BB1-483E-9127-2B93612DE49D}
+	EndGlobalSection
+EndGlobal

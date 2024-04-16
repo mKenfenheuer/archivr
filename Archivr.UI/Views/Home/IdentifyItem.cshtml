@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "/Views/Shared/_ScannerLayout.cshtml";
+}
+<div id="video-container">
+    <video id="qr-video"></video>
+</div>
+
+@section Scripts {
+    <!--<script src="../qr-scanner.umd.min.js"></script>-->
+    <!--<script src="../qr-scanner.legacy.min.js"></script>-->
+    <script type="module">
+        import QrScanner from "/lib/qr-scanner/qr-scanner.min.js";
+
+        const video = document.getElementById('qr-video');
+        const videoContainer = document.getElementById('video-container');
+
+        function setResult(result) {
+            console.log(result.data.replace(/(.*)\//g, ""));
+            window.location = "/Items/Details/" + result.data.replace(/(.*)\//g, "");
+        }
+
+        // ####### Web Cam Scanning #######
+
+        const scanner = new QrScanner(video, result => setResult(result), {
+            onDecodeError: error => {
+            },
+            highlightScanRegion: true,
+            highlightCodeOutline: true,
+        });
+
+        window.scanner = scanner;
+
+        const updateFlashAvailability = () => {
+            scanner.hasFlash().then(hasFlash => {
+                scanner.toggleFlash();
+            });
+        };
+
+        scanner.start().then(() => {
+            updateFlashAvailability();
+        });
+
+        QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+
+
+    </script>
+
+    <style>
+
+        #video-container {
+            line-height: 0;
+            height: 100%;
+        }
+
+            #video-container video {
+                width: 100%;
+                height: 100%;
+            }
+    </style>
+}

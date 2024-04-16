@@ -1,0 +1,42 @@
+before_script:
+  - export CI_ENVIRONMENT_HOST=$(echo $CI_ENVIRONMENT_URL | sed 's~http[s]*://~~g')
+
+stages:
+ - build
+ - deploy
+
+
+build_amd64_image:
+  stage: build
+  tags:
+    - docker
+    - build
+    - oracle
+    - shell
+    - arm64
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - cd Archivr.UI
+    - docker build -t frontend -f Dockerfile ..
+    - docker image tag frontend $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHORT_SHA
+    - docker image push $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHORT_SHA
+    - docker image prune -a
+
+deploy_production:
+  needs: 
+    - build_amd64_image
+  stage: deploy
+  allow_failure: false
+  only:
+   - main
+  environment:
+    name: prod
+    url: https://archivr.ksol.it
+  tags:
+    - docker
+    - oracle
+    - arm64
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker stop $CI_PROJECT_NAME-prod || true && docker rm $CI_PROJECT_NAME-prod || true
+    - docker run -d --name $CI_PROJECT_NAME-prod -l traefik.http.services.$CI_PROJECT_NAME-prod.loadbalancer.server.port=80 -l traefik.enable=true  -l "traefik.http.routers.$CI_PROJECT_NAME-prod.rule=Host(\`$CI_ENVIRONMENT_HOST\`)" $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHORT_SHA
