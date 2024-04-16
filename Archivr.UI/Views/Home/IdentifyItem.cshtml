@@ -8,11 +8,13 @@
 
 @section Scripts {
     <script src="~/lib/qr-scanner/qr-scanner.umd.min.js"></script>
-    <script src="~/lib/qr-scanner/qr-scanner.legacy.min.js"></script>
-    <script src="~/lib/qr-scanner/qr-scanner.min.js"></script>
+    <!--<script src="~/lib/qr-scanner/qr-scanner.legacy.min.js"></script>-->
+    <!--<script src="~/lib/qr-scanner/qr-scanner.min.js"></script>-->
     <script>
         const video = document.getElementById('qr-video');
         const videoContainer = document.getElementById('video-container');
+
+        var camHasCamera = {};
 
         function setResult(result) {
             console.log(result.data.replace(/(.*)\//g, ""));
