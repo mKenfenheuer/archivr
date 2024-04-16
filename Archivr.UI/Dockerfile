@@ -7,10 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Archivr.UI/Archivr.UI.csproj", "Archivr.UI/"]
-RUN dotnet restore "Archivr.UI/Archivr.UI.csproj"
 COPY . .
-WORKDIR "/src/Archivr.UI"
+RUN dotnet restore
 RUN dotnet build "Archivr.UI.csproj" -c Release -o /app/build
 
 FROM build AS publish
