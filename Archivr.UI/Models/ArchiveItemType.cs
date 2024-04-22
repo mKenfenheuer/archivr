@@ -1,5 +1,8 @@
-﻿namespace Archivr.UI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Archivr.UI.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ArchiveItemType
     {
         File = 10,

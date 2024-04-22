@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Archivr.UI.Models
 {
@@ -15,8 +17,10 @@ namespace Archivr.UI.Models
 
         public string? ParentId { get; set; }
         [ForeignKey(nameof(ParentId))]
+        [JsonIgnore]
         public ArchiveItem? Parent { get; set; }
+        [JsonIgnore]
 
-        public List<ArchiveItem>? Children { get; set;}
+        public List<ArchiveItem>? Children { get; set; }
     }
 }

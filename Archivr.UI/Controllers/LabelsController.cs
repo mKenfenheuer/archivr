@@ -1,7 +1,9 @@
 using Archivr.PrintingServer.Model;
+using Archivr.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using QRCoder;
 using System.Diagnostics;
+using System.Text.Json;
 using Wkhtmltopdf.NetCore;
 using Wkhtmltopdf.NetCore.Interfaces;
 using Wkhtmltopdf.NetCore.Options;

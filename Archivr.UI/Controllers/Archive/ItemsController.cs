@@ -12,6 +12,7 @@ using Archivr.PrintingServer.Model;
 using System.Configuration;
 using Wkhtmltopdf.NetCore;
 using QRCoder;
+using System.Text.Json;
 
 namespace Archivr.UI.Controllers.Archive
 {
@@ -33,6 +34,47 @@ namespace Archivr.UI.Controllers.Archive
         {
             var applicationDbContext = _context.ArchiveItems.Include(a => a.Parent);
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        [HttpGet("Import")]
+        public IActionResult Import()
+        {
+            return View();
+        }
+        
+
+        [HttpPost("Import")]
+        public async Task<IActionResult> Import([FromForm] IFormFileCollection files)
+        {
+            foreach (var file in files)
+            {
+                string str = new StreamReader(file.OpenReadStream()).ReadToEnd();
+                ArchiveItem[]? items = JsonSerializer.Deserialize<ArchiveItem[]>(str);
+
+                if (items == null || items.Length == 0)
+                    continue;
+                
+                foreach (var item in items)
+                {
+                    var existing = await _context.ArchiveItems.FirstOrDefaultAsync(a => a.Id == item.Id);
+                    if (existing != null)
+                    {
+                        existing.ParentId = item.ParentId;
+                        existing.Name = item.Name;
+                        existing.Description = item.Description;
+                        existing.ItemType = item.ItemType;
+                        _context.Update(existing);
+                    }
+                    else 
+                    {
+                        _context.Add(item);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Items/Details/5
